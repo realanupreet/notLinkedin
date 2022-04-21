@@ -1,0 +1,22 @@
+.HeaderOption {
+  display: flex;
+  margin: 0 0.8rem;
+  flex-direction: column;
+  align-items: center;
+  color: gray;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.HeaderOption:hover {
+  color: black;
+}
+.HeaderOption__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+
+  object-fit: contain;
+  border-radius: 50%;
+}
+.HeaderOption > p {
+  margin-top: 0.1rem;
+}

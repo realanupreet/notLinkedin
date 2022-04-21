@@ -1,2 +1,3 @@
 # notLinkedin
-Created with CodeSandbox
+
+tryna build a ui clone of linkedin with react

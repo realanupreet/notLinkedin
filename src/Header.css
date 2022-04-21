@@ -1,0 +1,47 @@
+.divofdoom {
+  position: sticky;
+  z-index: 999;
+  top: 0px;
+}
+.Header {
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 0.1rem solid rgb(196, 196, 196);
+  padding: 0.3rem 0;
+  width: 100%;
+  top: 0px;
+  position: sticky;
+  z-index: 999;
+  background-color: rgb(254, 254, 254);
+}
+.Header__left {
+  display: flex;
+  align-items: center;
+}
+.Header__icon > svg {
+  color: blue;
+  width: 2.6rem;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+}
+.Header__search {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  margin-left: 0.3rem;
+  border-radius: 1rem;
+  color: gray;
+  height: 2.2rem;
+  background-color: rgb(234, 244, 255);
+}
+.Header__search > input {
+  background: none;
+  outline: none;
+  border: none;
+  margin-left: 0.5rem;
+}
+.Header__right {
+  display: flex;
+  align-items: center;
+}
