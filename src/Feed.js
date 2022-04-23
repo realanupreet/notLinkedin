@@ -5,11 +5,15 @@ import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
 import EventIcon from "@mui/icons-material/Event";
 import DescriptionIcon from "@mui/icons-material/Description";
-
+// import { db } from "./firebase";
 import Post from "./Post";
+import { useEffect, useState } from "react";
 const Feed = () => {
+  // const [posts, setPosts] = useState([]);
+  // useEffect(() => {}, []);
   const sendPost = (e) => {
     e.preventDefault();
+    // db.collection("posts").onSnapshot();
   };
 
   return (
