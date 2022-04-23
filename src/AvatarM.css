@@ -1,0 +1,6 @@
+.AvatarM > svg {
+  width: 2.4rem;
+  height: 2.4rem;
+  background-color: white;
+  border-radius: 50%;
+}

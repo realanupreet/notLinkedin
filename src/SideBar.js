@@ -1,5 +1,6 @@
 import "./SideBar.css";
 import FaceIcon from "@mui/icons-material/Face";
+import AvatarM from "./AvatarM";
 const SideBar = () => {
   const recentItem = (topic) => (
     <div className="SideBar__recentItem">
@@ -14,7 +15,7 @@ const SideBar = () => {
         <div className="SideBar__top">
           <div className="SideBar__BGimg"></div>
           <div className="SideBar__BGimgAfter">
-            <FaceIcon />
+            <AvatarM />
             <h2>Focused Shaw</h2>
             <h4>intern at switch</h4>
           </div>
