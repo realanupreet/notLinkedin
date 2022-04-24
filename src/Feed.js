@@ -1,63 +1,93 @@
+//
+import { useState, useEffect } from "react";
 import "./Feed.css";
-import CreateIcon from "@mui/icons-material/Create";
+import CreateIcon from "@material-ui/icons/Create";
+import ImageIcon from "@material-ui/icons/Image";
+import SubscriptionsIcon from "@material-ui/icons/Subscriptions";
+import EventNoteIcon from "@material-ui/icons/EventNote";
+import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import InputOption from "./InputOption";
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
-import EventIcon from "@mui/icons-material/Event";
-import DescriptionIcon from "@mui/icons-material/Description";
-// import { db } from "./firebase";
 import Post from "./Post";
-import { useEffect, useState } from "react";
+import { db } from "./firebase";
+import firebase from "firebase";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
+import FlipMove from "react-flip-move";
+
 const Feed = () => {
-  // const [posts, setPosts] = useState([]);
-  // useEffect(() => {}, []);
+  const { user } = useSelector(selectUser);
+  const [input, setInput] = useState("");
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) =>
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data()
+          }))
+        )
+      );
+  }, []);
+
   const sendPost = (e) => {
     e.preventDefault();
-    // db.collection("posts").onSnapshot();
+
+    db.collection("posts").add({
+      name: user.displayName,
+      description: user.email,
+      message: input,
+      photoUrl: user.photoUrl || "",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    setInput("");
   };
 
   return (
-    <div className="Feed">
-      <div className="Feed__inputContainer">
-        <div className="Feed__input">
+    <div className="feed">
+      <div className="feed__inputContainer">
+        <div className="feed__input">
           <CreateIcon />
           <form>
-            <input type="text" />
-            <button type="submit" onClick={sendPost}>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+            />
+            <button onClick={sendPost} type="submit">
               Send
             </button>
           </form>
         </div>
-        <div className="Feed_inputOptions">
-          <InputOption title="Photo" Icon={InsertPhotoIcon} color="blue" />
 
-          <InputOption title="Video" Icon={OndemandVideoIcon} color="yellow" />
-
-          <InputOption title="Event" Icon={EventIcon} color="gray" />
-
+        <div className="feed__inputOptions">
+          <InputOption title="Photo" Icon={ImageIcon} color="#70B5F9" />
+          <InputOption title="Video" Icon={SubscriptionsIcon} color="#E7A33E" />
+          <InputOption title="Event" Icon={EventNoteIcon} color="#C0CBCD" />
           <InputOption
             title="Write article"
-            Icon={DescriptionIcon}
-            color="green"
+            Icon={CalendarViewDayIcon}
+            color="#7FC15E"
           />
         </div>
       </div>
 
-      {/* posts */}
-
-      <div className="Feed__posts">
-        <Post
-          name="Sonny"
-          description="intern at switch"
-          message="hey, y'all #greatLife"
-        />
-        <Post
-          name="Sonny"
-          description="intern at switch"
-          message="hey, y'all #greatLife"
-        />
-      </div>
+      <FlipMove>
+        {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+          <Post
+            key={id}
+            name={name}
+            description={description}
+            message={message}
+            photoUrl={photoUrl}
+          />
+        ))}
+      </FlipMove>
     </div>
   );
 };
+
 export default Feed;

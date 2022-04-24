@@ -7,7 +7,7 @@ import ShareIcon from "@mui/icons-material/Share";
 
 import SendIcon from "@mui/icons-material/Send";
 import AvatarM from "./AvatarM";
-const Post = ({ name, description, message, photourl }) => {
+const Post = ({ name, description, message, photoUrl }) => {
   return (
     <div className="Post">
       <div className="Post__header">
